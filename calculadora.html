@@ -597,6 +597,261 @@
     }
     .action-button:hover { border-color: rgba(245,166,35,0.65); color: var(--text); }
 
+    /* --- GERADOR DE PROPOSTA --- */
+    .proposal-builder {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 28px 24px 56px;
+      display: grid;
+      grid-template-columns: minmax(340px, 440px) minmax(0, 1fr);
+      gap: 24px;
+      align-items: start;
+    }
+    .proposal-form { display: flex; flex-direction: column; gap: 18px; }
+    .proposal-form .card-body { padding: 16px; }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .form-field { display: flex; flex-direction: column; gap: 6px; }
+    .form-field.full { grid-column: 1 / -1; }
+    .form-field label {
+      color: var(--text-dim);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .form-field input,
+    .form-field textarea,
+    .form-field select {
+      width: 100%;
+      min-width: 0;
+      background: var(--surface3);
+      border: 1px solid var(--border2);
+      border-radius: 6px;
+      color: var(--text);
+      font: 13px var(--sans);
+      padding: 9px 10px;
+      outline: none;
+      text-align: left;
+    }
+    .form-field textarea { min-height: 78px; resize: vertical; line-height: 1.45; }
+    .form-field input:focus,
+    .form-field textarea:focus,
+    .form-field select:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-glow); }
+    .proposal-services { display: flex; flex-direction: column; gap: 8px; }
+    .proposal-service-row {
+      display: grid;
+      grid-template-columns: 24px minmax(0, 1fr) 64px 96px;
+      gap: 8px;
+      align-items: center;
+      padding: 10px;
+      border: 1px solid var(--border);
+      background: var(--surface2);
+      border-radius: 8px;
+    }
+    .proposal-service-row:has(input[type="checkbox"]:checked) {
+      border-color: rgba(245,166,35,.48);
+      background: var(--accent-dim);
+    }
+    .proposal-service-row input[type="checkbox"] { accent-color: var(--accent); width: 16px; height: 16px; }
+    .proposal-service-row .service-copy strong { display: block; font-size: 12px; line-height: 1.25; }
+    .proposal-service-row .service-copy small { display: block; color: var(--text-dim); font-size: 10px; margin-top: 2px; }
+    .proposal-service-row .service-copy input[type="text"] {
+      width: 100%;
+      border: 1px solid var(--border2);
+      border-radius: 5px;
+      background: var(--surface3);
+      color: var(--text);
+      font: 600 12px var(--sans);
+      padding: 7px 8px;
+      outline: none;
+    }
+    .proposal-service-row input[type="number"] {
+      width: 100%;
+      padding: 6px;
+      font-size: 11px;
+    }
+    .proposal-service-row .qty-wrap::before,
+    .proposal-service-row .price-wrap::before {
+      display: block;
+      margin-bottom: 3px;
+      color: var(--text-muted);
+      font-size: 8px;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+    .proposal-service-row .qty-wrap::before { content: "Qtd."; }
+    .proposal-service-row .price-wrap::before { content: "Valor un."; }
+    .proposal-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .proposal-action {
+      appearance: none;
+      border: 1px solid rgba(245,166,35,.55);
+      border-radius: 7px;
+      background: var(--accent);
+      color: #082f3b;
+      cursor: pointer;
+      font: 700 12px var(--sans);
+      padding: 11px 14px;
+    }
+    .proposal-action.secondary { color: var(--accent); background: var(--surface2); }
+    .proposal-action:hover { filter: brightness(1.06); }
+    .proposal-hint { color: var(--text-dim); font-size: 11px; line-height: 1.5; }
+
+    .proposal-preview-shell {
+      position: sticky;
+      top: 16px;
+      max-height: calc(100vh - 32px);
+      overflow: auto;
+      padding: 14px;
+      background: #071b24;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+    }
+    .proposal-preview-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 12px;
+      color: var(--text-dim);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+    .proposal-pages { display: flex; flex-direction: column; align-items: center; gap: 16px; }
+    .proposal-page {
+      --proposal-navy: #003945;
+      --proposal-blue: #00617a;
+      --proposal-yellow: #ffc43d;
+      width: min(100%, 720px);
+      aspect-ratio: 210 / 297;
+      background: var(--proposal-navy);
+      color: #f8fbfc;
+      box-shadow: 0 8px 28px rgba(0,0,0,.35);
+      padding: 5.5% 5.8%;
+      position: relative;
+      overflow: hidden;
+      font-family: var(--sans);
+    }
+    .proposal-page * { box-sizing: border-box; }
+    .proposal-page p { font-size: clamp(7px, 1.15vw, 11px); line-height: 1.55; }
+    .proposal-page-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: #89acb5;
+      font-size: clamp(6px, .9vw, 9px);
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      margin-bottom: 4.5%;
+    }
+    .proposal-logo { color: var(--proposal-yellow); font-weight: 800; letter-spacing: -.05em; font-size: 1.4em; }
+    .proposal-logo small { display: block; font-size: .38em; letter-spacing: .12em; text-align: center; margin-top: -2px; }
+    .proposal-heading {
+      display: inline-block;
+      margin: 0 0 2.2%;
+      border-radius: 2px;
+      background: var(--proposal-yellow);
+      color: var(--proposal-navy);
+      font-size: clamp(11px, 2.15vw, 20px);
+      line-height: 1;
+      padding: 1.7% 2.5%;
+      text-transform: uppercase;
+    }
+    .proposal-page-footer {
+      position: absolute;
+      bottom: 2.7%;
+      left: 5.8%;
+      right: 5.8%;
+      border-top: 1px solid rgba(255,255,255,.18);
+      padding-top: 1.3%;
+      display: flex;
+      justify-content: space-between;
+      color: #89acb5;
+      font-size: clamp(6px, .8vw, 8px);
+    }
+    .proposal-cover { display: flex; flex-direction: column; justify-content: center; }
+    .proposal-cover::before,
+    .proposal-cover::after { content: ""; position: absolute; border-radius: 50%; }
+    .proposal-cover::before { width: 62%; aspect-ratio: 1; left: -28%; top: -9%; border: 1px solid rgba(102,160,174,.22); box-shadow: 0 0 0 55px rgba(102,160,174,.05), 0 0 0 110px rgba(102,160,174,.035); }
+    .proposal-cover::after { width: 58%; aspect-ratio: 1; right: -20%; bottom: -20%; background: var(--proposal-yellow); }
+    .proposal-cover-logo { position: absolute; top: 20%; left: 8.7%; color: var(--proposal-yellow); font-size: clamp(34px, 8vw, 76px); line-height: .75; font-weight: 700; letter-spacing: -.08em; }
+    .proposal-cover-logo small { display: block; margin-top: 10px; font-size: .21em; letter-spacing: .04em; text-align: center; }
+    .proposal-cover-copy { margin-top: 12%; margin-left: 3.5%; max-width: 76%; z-index: 1; }
+    .proposal-cover-copy .eyebrow { color: var(--proposal-yellow); font-size: clamp(8px, 1.4vw, 13px); font-weight: 700; letter-spacing: .04em; }
+    .proposal-cover-copy h2 { color: var(--proposal-yellow); font-size: clamp(22px, 4.6vw, 42px); line-height: 1.02; margin: 2.5% 0 5%; text-transform: uppercase; }
+    .proposal-cover-copy h3 { color: var(--proposal-yellow); font-size: clamp(9px, 1.45vw, 14px); text-transform: uppercase; }
+    .proposal-cover-copy p { color: var(--proposal-yellow); margin-top: 1.5%; text-transform: uppercase; letter-spacing: .04em; }
+    .proposal-cover .cover-footer { position: absolute; left: 8.7%; bottom: 3.8%; color: white; z-index: 1; font-size: clamp(6px, .9vw, 9px); letter-spacing: .24em; }
+    .proposal-service-pills { display: grid; grid-template-columns: 1fr 1fr; gap: 1.4%; margin: 1% 0 3.2%; }
+    .proposal-service-pill { display: flex; align-items: center; gap: 3%; min-height: 36px; border-radius: 999px; background: var(--proposal-blue); padding: 1.6% 2.6%; font-size: clamp(7px, 1vw, 10px); font-weight: 700; }
+    .proposal-service-pill:nth-child(odd):last-child { grid-column: 1 / -1; }
+    .proposal-num { flex: 0 0 auto; display: grid; place-items: center; width: 24px; aspect-ratio: 1; border-radius: 50%; background: var(--proposal-yellow); color: var(--proposal-navy); font-size: .95em; }
+    .proposal-benefits { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2%; margin-top: 2%; }
+    .proposal-benefit { border-radius: 10px; background: var(--proposal-yellow); color: var(--proposal-navy); text-align: center; padding: 4% 2%; }
+    .proposal-benefit strong { display: block; font-size: clamp(7px, 1.1vw, 11px); text-transform: uppercase; }
+    .proposal-benefit span { font-size: clamp(6px, .9vw, 9px); }
+    .proposal-scope-list { display: flex; flex-direction: column; gap: 1.7%; margin-top: 1%; }
+    .proposal-scope-item { display: grid; grid-template-columns: 32px 1fr; gap: 2.5%; align-items: start; border-radius: 16px; background: var(--proposal-blue); padding: 2.2% 2.8%; }
+    .proposal-scope-item strong { display: block; margin-bottom: .5%; font-size: clamp(7px, 1.05vw, 10px); }
+    .proposal-scope-item p { color: #d7e5e9; }
+    .proposal-investment { width: 100%; margin-top: 4%; border-collapse: collapse; background: #f2f5f6; color: var(--proposal-navy); font-size: clamp(7px, 1vw, 10px); }
+    .proposal-investment thead { background: var(--proposal-yellow); }
+    .proposal-investment th { padding: 2.2%; text-align: left; text-transform: uppercase; }
+    .proposal-investment th:last-child { text-align: right; }
+    .proposal-investment td { padding: 2.8% 2.2%; vertical-align: top; border-bottom: 1px solid rgba(255,196,61,.75); }
+    .proposal-investment td:first-child { width: 7%; text-align: center; font-weight: 700; }
+    .proposal-investment td:last-child { width: 26%; text-align: right; font-weight: 700; }
+    .proposal-investment td small { display: block; margin-top: 3px; color: #3f6a75; font-weight: 400; line-height: 1.35; }
+    .proposal-total { margin: 3% 0 0 auto; width: 45%; border-radius: 8px; background: var(--proposal-yellow); color: var(--proposal-navy); padding: 2.2% 3%; display: flex; justify-content: space-between; font-size: clamp(8px, 1.2vw, 12px); font-weight: 800; }
+    .proposal-note { margin-top: 2.5%; color: #9bb7be; font-style: italic; font-size: clamp(6px, .85vw, 9px) !important; }
+    .proposal-payment-list { display: flex; flex-direction: column; gap: 2%; margin-bottom: 4%; }
+    .proposal-payment-item { display: grid; grid-template-columns: 30px 1fr; gap: 2%; align-items: center; border-radius: 999px; background: var(--proposal-blue); padding: 1.8% 2.8%; font-size: clamp(7px, 1.05vw, 10px); font-weight: 700; }
+    .proposal-next { margin: 1.5% 0 3% 2.5%; padding-left: 2.5%; }
+    .proposal-next li { margin: 1.2% 0; padding-left: 1%; color: #eef6f7; font-size: clamp(7px, 1vw, 10px); line-height: 1.45; }
+    .proposal-next li::marker { color: var(--proposal-yellow); }
+    .proposal-signoff { margin-top: 3%; color: #e9f2f4; }
+    .proposal-signoff strong { display: block; color: white; margin: .5% 0; }
+    .proposal-empty { color: #8faeb6; font-style: italic; padding: 2%; }
+
+    @media (max-width: 980px) {
+      .proposal-builder { grid-template-columns: 1fr; }
+      .proposal-preview-shell { position: static; max-height: none; }
+    }
+    @media (max-width: 560px) {
+      .form-grid, .proposal-actions { grid-template-columns: 1fr; }
+      .proposal-service-row { grid-template-columns: 22px 1fr 58px 82px; padding: 8px 6px; }
+    }
+
+    @page { size: A4; margin: 0; }
+    @media print {
+      html, body { background: white !important; }
+      body > .page-header, body > .page-tabs, body > .page-section:not(#page-proposta),
+      #page-proposta .proposal-form, #page-proposta .proposal-preview-title { display: none !important; }
+      #page-proposta { display: block !important; }
+      #page-proposta .proposal-builder { display: block; margin: 0; padding: 0; max-width: none; }
+      #page-proposta .proposal-preview-shell { position: static; max-height: none; overflow: visible; border: 0; border-radius: 0; padding: 0; background: transparent; }
+      #page-proposta .proposal-pages { display: block; }
+      #page-proposta .proposal-page { width: 210mm; height: 297mm; aspect-ratio: auto; box-shadow: none; break-after: page; page-break-after: always; padding: 15.5mm 16mm; }
+      #page-proposta .proposal-page:last-child { break-after: auto; page-break-after: auto; }
+      #page-proposta .proposal-page p { font-size: 9pt; }
+      #page-proposta .proposal-page-header { font-size: 7pt; }
+      #page-proposta .proposal-heading { font-size: 16pt; }
+      #page-proposta .proposal-cover-logo { font-size: 54pt; }
+      #page-proposta .proposal-cover-copy .eyebrow { font-size: 10pt; }
+      #page-proposta .proposal-cover-copy h2 { font-size: 30pt; }
+      #page-proposta .proposal-cover-copy h3 { font-size: 10pt; }
+      #page-proposta .proposal-cover .cover-footer { font-size: 7pt; }
+      #page-proposta .proposal-service-pill, #page-proposta .proposal-scope-item strong,
+      #page-proposta .proposal-investment, #page-proposta .proposal-payment-item,
+      #page-proposta .proposal-next li { font-size: 8pt; }
+      #page-proposta .proposal-benefit strong { font-size: 8pt; }
+      #page-proposta .proposal-benefit span, #page-proposta .proposal-page-footer,
+      #page-proposta .proposal-note { font-size: 6.5pt !important; }
+      #page-proposta .proposal-total { font-size: 10pt; }
+      * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+    }
+
   </style>
 </head>
 <body>
@@ -607,7 +862,7 @@
     <h1>Precificação — Visita Técnica, Serviços Avulsos e Planos</h1>
     <p>Modelo enxuto para operação de Pós-Venda</p>
   </div>
-  <div class="header-badge">v1.12</div>
+  <div class="header-badge">v1.13</div>
 </div>
 
 <div class="page-tabs" aria-label="Navegação de páginas da precificação">
@@ -616,6 +871,7 @@
   <button class="tab-button" type="button" data-page="page-desc-visita">Descrição Visita Técnica</button>
   <button class="tab-button" type="button" data-page="page-essencial">Descrição Essencial</button>
   <button class="tab-button" type="button" data-page="page-prime">Descrição Prime</button>
+  <button class="tab-button" type="button" data-page="page-proposta">Gerador de Proposta</button>
 </div>
 
 <section class="page-section active" id="page-visita">
@@ -1187,6 +1443,178 @@
 </section>
 
 
+<section class="page-section" id="page-proposta">
+  <div class="proposal-builder">
+    <div class="proposal-form">
+      <div class="card">
+        <div class="card-header">
+          <span class="card-header-icon">👤</span>
+          <h2>Dados do Cliente</h2>
+          <span class="badge badge-edit">Preencher</span>
+        </div>
+        <div class="card-body">
+          <div class="form-grid">
+            <div class="form-field full">
+              <label for="prop-cliente">Nome / Razão Social</label>
+              <input id="prop-cliente" type="text" placeholder="Ex.: Comercial Mafra" autocomplete="organization">
+            </div>
+            <div class="form-field">
+              <label for="prop-documento">CPF / CNPJ</label>
+              <input id="prop-documento" type="text" placeholder="Opcional">
+            </div>
+            <div class="form-field">
+              <label for="prop-contato">Pessoa de contato</label>
+              <input id="prop-contato" type="text" placeholder="Nome do contato" autocomplete="name">
+            </div>
+            <div class="form-field">
+              <label for="prop-email">E-mail</label>
+              <input id="prop-email" type="email" placeholder="cliente@empresa.com" autocomplete="email">
+            </div>
+            <div class="form-field">
+              <label for="prop-telefone">Telefone</label>
+              <input id="prop-telefone" type="tel" placeholder="(84) 99999-9999" autocomplete="tel">
+            </div>
+            <div class="form-field full">
+              <label for="prop-local">Cidade / UF</label>
+              <input id="prop-local" type="text" placeholder="Natal / RN">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="card-header-icon">🧾</span>
+          <h2>Serviços da Proposta</h2>
+          <span class="badge badge-edit">Selecionar</span>
+        </div>
+        <div class="card-body">
+          <div class="proposal-services" id="proposal-services">
+            <label class="proposal-service-row" data-service="visita">
+              <input type="checkbox" class="prop-service-check">
+              <span class="service-copy"><strong>Visita Técnica</strong><small>Diagnóstico técnico presencial</small></span>
+              <span class="qty-wrap"><input type="number" class="prop-service-qty" value="1" min="1" step="1"></span>
+              <span class="price-wrap"><input type="number" class="prop-service-price" value="474.53" min="0" step="0.01"></span>
+            </label>
+            <label class="proposal-service-row" data-service="rateio">
+              <input type="checkbox" class="prop-service-check">
+              <span class="service-copy"><strong>Alteração de Rateio</strong><small>Ajuste de percentuais de créditos</small></span>
+              <span class="qty-wrap"><input type="number" class="prop-service-qty" value="1" min="1" step="1"></span>
+              <span class="price-wrap"><input type="number" class="prop-service-price" value="120" min="0" step="0.01"></span>
+            </label>
+            <label class="proposal-service-row" data-service="reclamacao">
+              <input type="checkbox" class="prop-service-check">
+              <span class="service-copy"><strong>Abertura de Reclamação</strong><small>Tratativa junto à concessionária</small></span>
+              <span class="qty-wrap"><input type="number" class="prop-service-qty" value="1" min="1" step="1"></span>
+              <span class="price-wrap"><input type="number" class="prop-service-price" value="100" min="0" step="0.01"></span>
+            </label>
+            <label class="proposal-service-row" data-service="analise">
+              <input type="checkbox" class="prop-service-check">
+              <span class="service-copy"><strong>Análise de Fatura</strong><small>Conferência de consumo e créditos</small></span>
+              <span class="qty-wrap"><input type="number" class="prop-service-qty" value="1" min="1" step="1"></span>
+              <span class="price-wrap"><input type="number" class="prop-service-price" value="120" min="0" step="0.01"></span>
+            </label>
+            <label class="proposal-service-row" data-service="titularidade">
+              <input type="checkbox" class="prop-service-check">
+              <span class="service-copy"><strong>Troca de Titularidade</strong><small>Apoio documental e solicitação</small></span>
+              <span class="qty-wrap"><input type="number" class="prop-service-qty" value="1" min="1" step="1"></span>
+              <span class="price-wrap"><input type="number" class="prop-service-price" value="100" min="0" step="0.01"></span>
+            </label>
+            <label class="proposal-service-row" data-service="acompanhamento">
+              <input type="checkbox" class="prop-service-check">
+              <span class="service-copy"><strong>Acompanhamento Avulso</strong><small>Combo de três meses</small></span>
+              <span class="qty-wrap"><input type="number" class="prop-service-qty" value="1" min="1" step="1"></span>
+              <span class="price-wrap"><input type="number" class="prop-service-price" value="120" min="0" step="0.01"></span>
+            </label>
+            <label class="proposal-service-row" data-service="retirada-simples">
+              <input type="checkbox" class="prop-service-check">
+              <span class="service-copy"><strong>Retirada de Módulos - Simples</strong><small>Retirada, armazenamento e reinstalação</small></span>
+              <span class="qty-wrap"><input type="number" class="prop-service-qty" value="1" min="1" step="1"></span>
+              <span class="price-wrap"><input type="number" class="prop-service-price" value="200" min="0" step="0.01"></span>
+            </label>
+            <label class="proposal-service-row" data-service="retirada-completa">
+              <input type="checkbox" class="prop-service-check">
+              <span class="service-copy"><strong>Retirada de Módulos - Completa</strong><small>Módulos, perfis, cabeamento e reinstalação</small></span>
+              <span class="qty-wrap"><input type="number" class="prop-service-qty" value="1" min="1" step="1"></span>
+              <span class="price-wrap"><input type="number" class="prop-service-price" value="400" min="0" step="0.01"></span>
+            </label>
+            <label class="proposal-service-row" data-service="essencial">
+              <input type="checkbox" class="prop-service-check">
+              <span class="service-copy"><strong>Plano de Monitoramento Essencial</strong><small>Plano anual</small></span>
+              <span class="qty-wrap"><input type="number" class="prop-service-qty" value="1" min="1" step="1"></span>
+              <span class="price-wrap"><input type="number" class="prop-service-price" value="600" min="0" step="0.01"></span>
+            </label>
+            <label class="proposal-service-row" data-service="prime">
+              <input type="checkbox" class="prop-service-check">
+              <span class="service-copy"><strong>Plano de Monitoramento Prime</strong><small>Plano anual</small></span>
+              <span class="qty-wrap"><input type="number" class="prop-service-qty" value="1" min="1" step="1"></span>
+              <span class="price-wrap"><input type="number" class="prop-service-price" value="1500" min="0" step="0.01"></span>
+            </label>
+            <label class="proposal-service-row" data-service="personalizado">
+              <input type="checkbox" class="prop-service-check">
+              <span class="service-copy"><input id="prop-custom-name" type="text" value="Serviço personalizado" aria-label="Nome do serviço personalizado"></span>
+              <span class="qty-wrap"><input type="number" class="prop-service-qty" value="1" min="1" step="1"></span>
+              <span class="price-wrap"><input type="number" class="prop-service-price" value="0" min="0" step="0.01"></span>
+            </label>
+          </div>
+          <div class="section-note">Os valores podem ser ajustados apenas para esta proposta. A tabela original da calculadora não é alterada.</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="card-header-icon">⚙️</span>
+          <h2>Condições Comerciais</h2>
+        </div>
+        <div class="card-body">
+          <div class="form-grid">
+            <div class="form-field">
+              <label for="prop-data">Data de emissão</label>
+              <input id="prop-data" type="date">
+            </div>
+            <div class="form-field">
+              <label for="prop-validade">Validade em dias</label>
+              <input id="prop-validade" type="number" value="10" min="1" max="365">
+            </div>
+            <div class="form-field">
+              <label for="prop-desconto">Desconto na proposta (R$)</label>
+              <input id="prop-desconto" type="number" value="0" min="0" step="0.01">
+            </div>
+            <div class="form-field full">
+              <label for="prop-pagamento">Forma de pagamento</label>
+              <textarea id="prop-pagamento">Pagamento à vista por boleto bancário ou Pix. Para planos anuais, parcelamento em até 12x no cartão de crédito.</textarea>
+            </div>
+            <div class="form-field full">
+              <label for="prop-observacoes">Observações</label>
+              <textarea id="prop-observacoes">Serviços de campo, peças e materiais não descritos no investimento serão orçados separadamente.</textarea>
+            </div>
+            <div class="form-field">
+              <label for="prop-consultor">Responsável</label>
+              <input id="prop-consultor" type="text" value="Pedro Caetano">
+            </div>
+            <div class="form-field">
+              <label for="prop-cargo">Cargo</label>
+              <input id="prop-cargo" type="text" value="Supervisor Pós-Venda">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="proposal-actions">
+        <button class="proposal-action secondary" id="prop-importar" type="button">Importar seleção atual</button>
+        <button class="proposal-action" id="prop-imprimir" type="button">Imprimir / Salvar em PDF</button>
+      </div>
+      <p class="proposal-hint">Na janela de impressão, escolha <strong>Salvar como PDF</strong>, papel A4, margens “Nenhuma” e ative os gráficos de plano de fundo.</p>
+    </div>
+
+    <div class="proposal-preview-shell">
+      <div class="proposal-preview-title"><span>Prévia da proposta</span><span id="prop-page-count">5 páginas A4</span></div>
+      <div class="proposal-pages" id="proposal-pages"></div>
+    </div>
+  </div>
+</section>
+
+
 <section class="page-section" id="page-essencial">
   <div class="plan-page">
     <div class="plan-grid">
@@ -1545,6 +1973,265 @@
     set('br-seguro-14', 'R$ ' + brl(seguro14));
   }
 
+  const PROPOSAL_SERVICE_DETAILS = {
+    visita: 'Inspeção visual dos módulos, inversor, cabeamento, proteções e conexões, com diagnóstico técnico e recomendações de correção.',
+    rateio: 'Análise e solicitação de alteração dos percentuais de distribuição dos créditos de energia junto à concessionária.',
+    reclamacao: 'Preparação, abertura e acompanhamento da reclamação junto à concessionária, com registro de protocolos e retornos.',
+    analise: 'Conferência da fatura de energia, consumo, geração, compensação e créditos, com indicação de possíveis divergências.',
+    titularidade: 'Orientação documental e acompanhamento da solicitação de troca de titularidade da unidade consumidora.',
+    acompanhamento: 'Acompanhamento remoto da usina por três meses, com análise de geração, alertas e orientações iniciais.',
+    'retirada-simples': 'Retirada dos módulos, armazenamento temporário e retorno ao local para reinstalação dos módulos.',
+    'retirada-completa': 'Retirada de módulos, perfis e cabeamento, seguida da reinstalação completa dos componentes.',
+    essencial: 'Monitoramento remoto, diagnóstico de falhas, relatórios periódicos e suporte técnico durante o plano anual.',
+    prime: 'Monitoramento completo, relatórios, verificação de alertas e apoio em tratativas junto à concessionária durante o plano anual.',
+    personalizado: 'Execução do serviço personalizado conforme alinhamento comercial e condições descritas nesta proposta.'
+  };
+
+  function proposalEscape(value) {
+    return String(value ?? '')
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#039;');
+  }
+
+  function proposalValue(id, fallback = '') {
+    const el = document.getElementById(id);
+    return el && el.value.trim() ? el.value.trim() : fallback;
+  }
+
+  function proposalNumber(id, fallback = 0) {
+    const el = document.getElementById(id);
+    const value = el ? parseFloat(el.value) : NaN;
+    return Number.isFinite(value) ? value : fallback;
+  }
+
+  function proposalDate(value) {
+    if (!value) return '';
+    const parts = value.split('-');
+    if (parts.length !== 3) return value;
+    const months = ['janeiro','fevereiro','março','abril','maio','junho','julho','agosto','setembro','outubro','novembro','dezembro'];
+    return `${parseInt(parts[2], 10)} de ${months[parseInt(parts[1], 10) - 1]} de ${parts[0]}`;
+  }
+
+  function proposalHeader(client) {
+    return `<div class="proposal-page-header"><span>Proposta ONEVO | ${proposalEscape(client)}</span><span class="proposal-logo">ONEVO<small>HUB DE ENERGIA</small></span></div>`;
+  }
+
+  function proposalFooter(label, page) {
+    return `<div class="proposal-page-footer"><span>${proposalEscape(label)}</span><span>${String(page).padStart(2, '0')}</span></div>`;
+  }
+
+  function getProposalServices() {
+    return Array.from(document.querySelectorAll('.proposal-service-row')).filter(row => {
+      return row.querySelector('.prop-service-check').checked;
+    }).map(row => {
+      const key = row.dataset.service;
+      const customName = key === 'personalizado' ? proposalValue('prop-custom-name', 'Serviço personalizado') : '';
+      const name = customName || row.querySelector('.service-copy strong').textContent.trim();
+      const small = row.querySelector('.service-copy small');
+      const qty = Math.max(parseFloat(row.querySelector('.prop-service-qty').value) || 1, 0);
+      const price = Math.max(parseFloat(row.querySelector('.prop-service-price').value) || 0, 0);
+      return {
+        key,
+        name,
+        subtitle: small ? small.textContent.trim() : 'Conforme escopo acordado',
+        description: PROPOSAL_SERVICE_DETAILS[key] || PROPOSAL_SERVICE_DETAILS.personalizado,
+        qty,
+        price,
+        total: qty * price
+      };
+    });
+  }
+
+  function renderProposal() {
+    const client = proposalValue('prop-cliente', 'Cliente');
+    const contact = proposalValue('prop-contato');
+    const documentValue = proposalValue('prop-documento');
+    const email = proposalValue('prop-email');
+    const phone = proposalValue('prop-telefone');
+    const location = proposalValue('prop-local');
+    const issueDate = proposalValue('prop-data');
+    const validity = Math.max(proposalNumber('prop-validade', 10), 1);
+    const discount = Math.max(proposalNumber('prop-desconto', 0), 0);
+    const payment = proposalValue('prop-pagamento', 'Pagamento à vista por boleto bancário ou Pix.');
+    const notes = proposalValue('prop-observacoes');
+    const consultant = proposalValue('prop-consultor', 'Equipe ONEVO');
+    const role = proposalValue('prop-cargo', 'Pós-Venda');
+    const services = getProposalServices();
+    const subtotal = services.reduce((sum, service) => sum + service.total, 0);
+    const appliedDiscount = Math.min(discount, subtotal);
+    const total = Math.max(subtotal - appliedDiscount, 0);
+    const proposalLabel = services.length === 1 ? services[0].name : services.length > 1 ? 'Soluções em Energia' : 'Proposta Comercial';
+    const coverSubtitle = location ? `Atendimento em ${location}` : 'Soluções personalizadas para ativos de energia';
+    const headerClient = client.toUpperCase();
+
+    const servicePills = services.length ? services.map((service, index) => `
+      <div class="proposal-service-pill"><span class="proposal-num">${String(index + 1).padStart(2, '0')}</span><span>${proposalEscape(service.name)}</span></div>
+    `).join('') : '<p class="proposal-empty">Selecione pelo menos um serviço para compor a proposta.</p>';
+
+    const scopeItems = services.length ? services.map((service, index) => `
+      <div class="proposal-scope-item">
+        <span class="proposal-num">${String(index + 1).padStart(2, '0')}</span>
+        <div><strong>${proposalEscape(service.name)}</strong><p>${proposalEscape(service.description)}</p></div>
+      </div>
+    `).join('') : '<p class="proposal-empty">O escopo aparecerá aqui após a seleção dos serviços.</p>';
+
+    const investmentRows = services.length ? services.map((service, index) => `
+      <tr>
+        <td>${index + 1}</td>
+        <td><strong>${proposalEscape(service.name)}</strong><small>${proposalEscape(service.subtitle)}${service.qty !== 1 ? ` · Quantidade: ${service.qty.toLocaleString('pt-BR')}` : ''}</small></td>
+        <td>R$ ${brl(service.total)}${service.qty !== 1 ? `<small>R$ ${brl(service.price)} / un.</small>` : ''}</td>
+      </tr>
+    `).join('') : '<tr><td>-</td><td>Nenhum serviço selecionado</td><td>R$ 0,00</td></tr>';
+
+    const discountRow = appliedDiscount > 0 ? `
+      <tr><td></td><td><strong>Desconto comercial</strong></td><td>- R$ ${brl(appliedDiscount)}</td></tr>
+    ` : '';
+
+    const contactBits = [contact && `Contato: ${contact}`, documentValue && `CPF/CNPJ: ${documentValue}`, email, phone].filter(Boolean);
+    const paymentLines = (payment.includes('\n') ? payment.split(/\n+/) : (payment.match(/[^.!?]+[.!?]?/g) || [payment]))
+      .map(item => item.trim()).filter(Boolean).slice(0, 4);
+    const paymentMarkup = paymentLines.map((item, index) => `
+      <div class="proposal-payment-item"><span class="proposal-num">${String(index + 1).padStart(2, '0')}</span><span>${proposalEscape(item)}</span></div>
+    `).join('');
+
+    const pages = `
+      <article class="proposal-page proposal-cover">
+        <div class="proposal-cover-logo">ONEVO<small>HUB DE ENERGIA</small></div>
+        <div class="proposal-cover-copy">
+          <div class="eyebrow">PROPOSTA COMERCIAL</div>
+          <h2>${proposalEscape(proposalLabel)}</h2>
+          <h3>${proposalEscape(headerClient)}</h3>
+          <p>${proposalEscape(coverSubtitle)}</p>
+        </div>
+        <div class="cover-footer">ONEVO HUB DE ENERGIA&nbsp;&nbsp;|&nbsp;&nbsp;2026</div>
+      </article>
+
+      <article class="proposal-page">
+        ${proposalHeader(headerClient)}
+        <h2 class="proposal-heading">A ONEVO</h2>
+        <p>A ONEVO - Hub de Energia atua com soluções completas para ativos de energia, reunindo experiência técnica, acompanhamento próximo e foco em desempenho. Esta proposta foi estruturada para atender às necessidades apresentadas pelo cliente com clareza, agilidade e segurança.</p>
+        <h2 class="proposal-heading" style="margin-top:4.5%">Serviços Propostos</h2>
+        <div class="proposal-service-pills">${servicePills}</div>
+        <h2 class="proposal-heading">Benefícios</h2>
+        <div class="proposal-benefits">
+          <div class="proposal-benefit"><strong>Visibilidade</strong><span>dos serviços e resultados</span></div>
+          <div class="proposal-benefit"><strong>Gestão</strong><span>técnica e documental</span></div>
+          <div class="proposal-benefit"><strong>Agilidade</strong><span>no atendimento das demandas</span></div>
+        </div>
+        ${proposalFooter(proposalLabel, 2)}
+      </article>
+
+      <article class="proposal-page">
+        ${proposalHeader(headerClient)}
+        <h2 class="proposal-heading">Escopo dos Serviços</h2>
+        <p style="margin-bottom:2.5%">A atuação contempla os itens selecionados abaixo, conforme quantidades e condições comerciais apresentadas nesta proposta.</p>
+        <div class="proposal-scope-list">${scopeItems}</div>
+        ${proposalFooter(proposalLabel, 3)}
+      </article>
+
+      <article class="proposal-page">
+        ${proposalHeader(headerClient)}
+        <h2 class="proposal-heading">Investimento</h2>
+        <table class="proposal-investment">
+          <thead><tr><th>ID</th><th>Descrição</th><th>Valor</th></tr></thead>
+          <tbody>${investmentRows}${discountRow}</tbody>
+        </table>
+        <div class="proposal-total"><span>Total</span><span>R$ ${brl(total)}</span></div>
+        ${notes ? `<p class="proposal-note">Obs.: ${proposalEscape(notes)}</p>` : ''}
+        ${proposalFooter(proposalLabel, 4)}
+      </article>
+
+      <article class="proposal-page">
+        ${proposalHeader(headerClient)}
+        <h2 class="proposal-heading">Formas de Pagamento</h2>
+        <div class="proposal-payment-list">${paymentMarkup}</div>
+        <h2 class="proposal-heading">Próximas Etapas</h2>
+        <p style="color:var(--proposal-yellow);font-weight:700;margin-bottom:1.5%">Após o recebimento do aceite formal da proposta, daremos sequência às seguintes etapas:</p>
+        <ul class="proposal-next">
+          <li>Confirmação dos dados cadastrais e da forma de pagamento;</li>
+          <li>Alinhamento do cronograma e recebimento da documentação necessária;</li>
+          <li>Início da execução dos serviços selecionados e atualização do cliente sobre o andamento.</li>
+        </ul>
+        <h3 class="proposal-heading" style="font-size:clamp(8px,1.3vw,13px)">Validade da Proposta</h3>
+        <p>Esta proposta possui validade de <strong style="color:var(--proposal-yellow)">${validity} (${validity === 10 ? 'dez' : validity}) dias</strong>, contados a partir da data de emissão. Após esse prazo, valores e condições poderão ser revistos.</p>
+        ${contactBits.length ? `<p style="margin-top:2.5%;color:#9fc0c8">Dados do cliente: ${proposalEscape(contactBits.join(' · '))}</p>` : ''}
+        <div class="proposal-signoff">
+          <p>Atenciosamente,</p>
+          <strong>${proposalEscape(consultant)}</strong>
+          <p>${proposalEscape(role)}<br>ONEVO HUB DE ENERGIA</p>
+          ${issueDate ? `<p style="text-align:right;margin-top:-3%">${proposalEscape(proposalDate(issueDate))}</p>` : ''}
+        </div>
+        ${proposalFooter(proposalLabel, 5)}
+      </article>
+    `;
+
+    document.getElementById('proposal-pages').innerHTML = pages;
+  }
+
+  function parseDisplayedBRL(text) {
+    const normalized = String(text || '').replace(/[^0-9,.-]/g, '').replace(/\./g, '').replace(',', '.');
+    return parseFloat(normalized) || 0;
+  }
+
+  function importCurrentSelection() {
+    calcular();
+    calcularAvulsos();
+    const map = {
+      rateio: 'qtd-rateio',
+      reclamacao: 'qtd-reclamacao',
+      analise: 'qtd-analise',
+      titularidade: 'qtd-titularidade',
+      acompanhamento: 'qtd-acompanhamento',
+      'retirada-simples': 'qtd-retirada-modulos-simples',
+      'retirada-completa': 'qtd-retirada-modulos-completa',
+      essencial: 'qtd-plano-essencial',
+      prime: 'qtd-plano-prime'
+    };
+
+    Object.entries(map).forEach(([key, inputId]) => {
+      const row = document.querySelector(`.proposal-service-row[data-service="${key}"]`);
+      const qty = Math.max(parseFloat(document.getElementById(inputId).value) || 0, 0);
+      row.querySelector('.prop-service-check').checked = qty > 0;
+      if (qty > 0) row.querySelector('.prop-service-qty').value = qty;
+    });
+
+    const visitRow = document.querySelector('.proposal-service-row[data-service="visita"]');
+    const visitPrice = parseDisplayedBRL(document.getElementById('res-preco-final').textContent);
+    if (visitPrice > 0 && (parseFloat(document.getElementById('dias-eletricista').value) > 0 || parseFloat(document.getElementById('dias-ajudante1').value) > 0)) {
+      visitRow.querySelector('.prop-service-check').checked = true;
+      visitRow.querySelector('.prop-service-price').value = visitPrice.toFixed(2);
+    }
+
+    document.getElementById('prop-desconto').value = parseDisplayedBRL(document.getElementById('br-desconto-avulsos').textContent).toFixed(2);
+    renderProposal();
+    const button = document.getElementById('prop-importar');
+    const original = button.textContent;
+    button.textContent = 'Seleção importada ✓';
+    setTimeout(() => { button.textContent = original; }, 1800);
+  }
+
+  function initializeProposal() {
+    const dateInput = document.getElementById('prop-data');
+    const today = new Date();
+    const pad = number => String(number).padStart(2, '0');
+    dateInput.value = `${today.getFullYear()}-${pad(today.getMonth() + 1)}-${pad(today.getDate())}`;
+
+    document.querySelectorAll('#page-proposta input, #page-proposta textarea, #page-proposta select').forEach(input => {
+      input.addEventListener('input', renderProposal);
+      input.addEventListener('change', renderProposal);
+    });
+    document.getElementById('prop-importar').addEventListener('click', importCurrentSelection);
+    document.getElementById('prop-imprimir').addEventListener('click', () => {
+      renderProposal();
+      window.print();
+    });
+    window.addEventListener('beforeprint', renderProposal);
+    renderProposal();
+  }
+
   function abrirPagina(target) {
     document.querySelectorAll('.tab-button').forEach(btn => {
       btn.classList.toggle('active', btn.dataset.page === target);
@@ -1574,6 +2261,10 @@
   calcular();
   calcularAvulsos();
   calcularSeguroSolar();
+  initializeProposal();
+  if (location.hash && document.querySelector(location.hash)) {
+    abrirPagina(location.hash.slice(1));
+  }
 </script>
 </body>
 </html>
